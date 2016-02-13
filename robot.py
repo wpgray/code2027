@@ -12,25 +12,27 @@ class MyRobot(wpilib.IterativeRobot):
         should be used for any initialization code.
         """
 
-        # Initiates the robot drive and joystiq
-        self.robot_drive = wpilib.RobotDrive(0, 1, 2, 3)
+        # Initiates the robot drive and joystick
+        self.leftWheels = wpilib.Talon(0)
+        self.rightWheels = wpilib.Talon(1)
+        self.leftWheels.setInverted(True)
+        self.robot_drive = wpilib.RobotDrive(self.leftWheels, self.rightWheels)
         self.stick = wpilib.Joystick(0)
 
         # Initiates Ball shooter
         self.leftSpinner = wpilib.Talon(4)
         self.rightSpinner = wpilib.Talon(5)
 
-        # Iniates Aimer motor and Loader
+        # Initiates angle motor and Loader
         self.aimer = wpilib.Talon(6)
         self.loader = wpilib.Talon(7)
 
-        # initiating the lift
+        # Initiating the lift
         self.liftMotor = wpilib.Talon(8)
         self.liftMotor2 = wpilib.Talon(9)
 
         # Adjust the angle of the shooter
         self.shooterAngle = wpilib.Talon(10)
-
 
     def autonomousInit(self):
         """This function is run once each time the robot enters autonomous mode."""
@@ -46,8 +48,18 @@ class MyRobot(wpilib.IterativeRobot):
         else:
             self.robot_drive.drive(0, 0)  # Stop robot
 
+        # go forward and drive/ this was commented out due to being a mock-up
+        """if self.auto_loop_counter < 100:
+            self.robot_drive.drive(-0.5, 0)
+            self.loader.set(-1.0)# shooter feed in and out
+            self.
+            self.auto_loop_counter += 1
+        else:
+            self.robot_drive.drive(0, 0)"""
+
     def teleopPeriodic(self):
         """This function is called periodically during operator control."""
+        self.robot_drive
         self.robot_drive.arcadeDrive(self.stick)
 
         # if button A is pushed, then Spin Shooter will take a ball in.
@@ -75,7 +87,7 @@ class MyRobot(wpilib.IterativeRobot):
             self.liftMotor.set(0)
             self.liftMotor2.set(0)
 
-        # if Left Bumper is pushed, then the shooter angle down
+        # if Left Bumper is pushed, then the shooter angle lessens
         if self.stick.getRawButton(5):
             self.shooterAngle.set(-1.0)
         elif self.stick.getRawButton(6):  # if right bumper pushed, shooter angle up
