@@ -7,8 +7,13 @@ Type out the following on Command Prompt:
 pip install opencv_python-3.1.0-cp35-none-win_amd64.whl
 
 This will setup opencv on the machine. To install it on the robot, follow the details on the github page
-we found the other day. However, even with opencv installed, Pycharm may not recognize it and it will say
-that it cannot find the module but it will work.
+we found the other day. After that copy the following line into command prompt:
+
+copy C:\Anaconda3\Lib\site-packages\cv2.cp35-win_amd64.pyd C:\Anaconda3\Lib\site-packages\cv2.pyd
+
+Press Enter. And then:
+
+copy C:\Anaconda3\Lib\site-packages\cv2.pyd C:\Anaconda3\DLLs\cv2.pyd
 
 To test this out, I included CVTest.py. To run this, open this project in Pycharm, open CVTest.py. Run>Run>CVTest
 
