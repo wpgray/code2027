@@ -1,0 +1,22 @@
+I included the file needed to install opencv on a windows 64 bit machine using Python 3.5.
+
+In order to do this, open up Command Prompt. CD into this directory (opencv_install).
+
+Type out the following on Command Prompt:
+
+pip install opencv_python-3.1.0-cp35-none-win_amd64.whl
+
+This will setup opencv on the machine. To install it on the robot, follow the details on the github page
+we found the other day. However, even with opencv installed, Pycharm may not recognize it and it will say
+that it cannot find the module but it will work.
+
+To test this out, I included CVTest.py. To run this, open this project in Pycharm, open CVTest.py. Run>Run>CVTest
+
+Enjoy the image :)
+
+Once you are done you can delete opencv_install folder.
+
+As of now, my Vision.py just displays the test.png image I have and when you click on the image, it will create
+a mask selecting the pixels of similar color.
+
+Luis
