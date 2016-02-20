@@ -5,6 +5,7 @@ import numpy as np
 This is mostly test code for now.
 Will clean up and comment when I figure out
 what I am doing
+great idea, luis
 """
 
 def mouseCallback(event, x, y, flags, param):
@@ -23,7 +24,7 @@ def mouseCallback(event, x, y, flags, param):
     :return: None
     """
 
-    # Detect when the left mouse button is clickeds
+    # Detect when the left mouse button is clicked
     if event == cv2.EVENT_LBUTTONDOWN:
         # Get the HSV value of the picture, image coordinates are in Y, X
         HSV = img[y, x]
@@ -55,8 +56,6 @@ def mouseCallback(event, x, y, flags, param):
         # Display mask
         cv2.imshow("test", mask)
 
-
-
 def GetCentroid(img):
     """
     Use the method I used to calculate CY and CX up there ^ to
@@ -68,8 +67,13 @@ def GetCentroid(img):
     """
 
     # Gave you a hint here, fill in the second parameter
-    hsv = cv2.cvtColor(img, )
+    HSV = cv2.cvtColor(img, cv2.COLOR_BGR2HSV)
 
+    lower_value = np.array([HSV[0] - 5, 50, 50])
+    upper_value = np.array([HSV[1] + 5, 255, 255])
+
+    mask = cv2.inRange(img, lower_value, upper_value)
+    print (CY, CX)
 
 # Window title
 IMAGE_NAME = "image"
@@ -93,6 +97,7 @@ img = cv2.imread('test.png', 1)
 cv2.imshow(IMAGE_NAME, img)
 # Tell OpenCV to use mouseCallback for mouse functionality
 cv2.setMouseCallback(IMAGE_NAME, mouseCallback)
+print(GetCentroid(img))
 
 # Convert image from RGB to HSV
 img = cv2.cvtColor(img, cv2.COLOR_BGR2HSV)
