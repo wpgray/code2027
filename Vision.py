@@ -44,9 +44,6 @@ def mouseCallback(event, x, y, flags, param):
             if area > max_area:
                 max_area = area
                 c_indx = i
-        rect = cv2.minAreaRect(contours[c_indx])
-        box = cv2.boxPoints(rect)
-        box = np.int0(box)
         M = cv2.moments(contours[c_indx])
 
         # THE CENTROID X AND Y
@@ -60,14 +57,18 @@ def mouseCallback(event, x, y, flags, param):
 
 
 
-def GetCentroid():
+def GetCentroid(img):
     """
-    Will compute the centroid of a binary image
-    :return:
+    Use the method I used to calculate CY and CX up there ^ to
+    implement this function. This function takes a parameter img
+    that is in BGR (rgb backwards), convert it to HSV and calculate
+    CX and CY.
+    :param img: the image in BGR, find the centroid
+    :return: (CX, CY)
     """
-    _, frame = cap.read()
 
-    hsv = cv2.cvtColor(frame, cv2.COLOR_BGR2HSV)
+    # Gave you a hint here, fill in the second parameter
+    hsv = cv2.cvtColor(img, )
 
 
 # Window title
