@@ -62,7 +62,7 @@ def GetCentroid(img):
     implement this function. This function takes a parameter img
     that is in BGR (rgb backwards), convert it to HSV and calculate
     CX and CY.
-    :param img: the image in BGR, find the centroid
+    :param img: the image in BGR, find the centroidh
     :return: (CX, CY)
     """
 
