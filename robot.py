@@ -48,13 +48,14 @@ class MyRobot(wpilib.IterativeRobot):
             self.auto_loop_counter += 1
         else:
             self.robot_drive.drive(0, 0)  # Stop robot
-            """
+        """
 
         # go forward and drive/ this was commented out due to being a mock-up
-        if self.auto_loop_counter < 100:
+        if self.auto_loop_counter < 100:  # two seconds
             self.robot_drive.drive(-0.5, 0)
             self.leftSpinner.set(1.0)
             self.rightSpinner.set(1.0)
+            self.loader.set(1.0)
             self.auto_loop_counter += 1
         else:
             self.robot_drive.drive(0, 0)

@@ -23,7 +23,7 @@ def mouseCallback(event, x, y, flags, param):
     :return: None
     """
 
-    # Detect when the left mouse button is clicked
+    # Detect when the left mouse button is clickeds
     if event == cv2.EVENT_LBUTTONDOWN:
         # Get the HSV value of the picture, image coordinates are in Y, X
         HSV = img[y, x]
@@ -34,7 +34,27 @@ def mouseCallback(event, x, y, flags, param):
 
         # Create binary image mask
         mask = cv2.inRange(img, lower_value, upper_value)
+        im2, contours, heirarchy = cv2.findContours(mask, cv2.RETR_LIST, cv2.CHAIN_APPROX_SIMPLE)
 
+        c_indx = 0
+        max_area = 0
+        for i in range(len(contours)):
+            cur = contours[i]
+            area = cv2.contourArea(cur)
+            if area > max_area:
+                max_area = area
+                c_indx = i
+        rect = cv2.minAreaRect(contours[c_indx])
+        box = cv2.boxPoints(rect)
+        box = np.int0(box)
+        M = cv2.moments(contours[c_indx])
+
+        # THE CENTROID X AND Y
+        CX = int(M['m10'] / M['m00'])
+        CY = int(M['m01'] / M['m00'])
+
+        print(CY, CX)
+        mask = cv2.circle(mask, (CX, CY), 20, (255, 255, 255), 1)
         # Display mask
         cv2.imshow("test", mask)
 
@@ -54,16 +74,16 @@ def GetCentroid():
 IMAGE_NAME = "image"
 
 # Values will be filled in later
-LOWER_H = 0
-LOWER_S = 0
-LOWER_V = 0
+LOWER_H = 81
+LOWER_S = 50
+LOWER_V = 50
 
-UPPER_H = 0
-UPPER_S = 0
-UPPER_V = 0
+UPPER_H = 101
+UPPER_S = 255
+UPPER_V = 255
 
-# This creates video streaming from the camera
-# cap = cv2.VideoCapture(0)
+# This creates video streaming from the camer
+cap = cv2.VideoCapture(0)
 
 # Read test image
 img = cv2.imread('test.png', 1)
