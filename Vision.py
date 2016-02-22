@@ -56,24 +56,27 @@ def mouseCallback(event, x, y, flags, param):
         # Display mask
         cv2.imshow("test", mask)
 
+        print(GetCentroid(img))
+
 def GetCentroid(img):
     """
     Use the method I used to calculate CY and CX up there ^ to
     implement this function. This function takes a parameter img
     that is in BGR (rgb backwards), convert it to HSV and calculate
     CX and CY.
-    :param img: the image in BGR, find the centroidh
+    :param img: the image in BGR, find the centroid
     :return: (CX, CY)
     """
 
     # Gave you a hint here, fill in the second parameter
     HSV = cv2.cvtColor(img, cv2.COLOR_BGR2HSV)
 
-    lower_value = np.array([HSV[0] - 5, 50, 50])
-    upper_value = np.array([HSV[1] + 5, 255, 255])
+    lower_value = np.array([HSV[0] + 81, 50, 50])
+    upper_value = np.array([HSV[0] - 101, 255, 255])
+    print(HSV)
 
     mask = cv2.inRange(img, lower_value, upper_value)
-    print (CY, CX)
+    print(CY, CX)
 
 # Window title
 IMAGE_NAME = "image"
