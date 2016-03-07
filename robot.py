@@ -18,6 +18,11 @@ class MyRobot(wpilib.IterativeRobot):
         self.leftWheels.setInverted(True)
         self.robot_drive = wpilib.RobotDrive(self.leftWheels, self.rightWheels)
         self.stick = wpilib.Joystick(0)
+        self.stick1 = wpilib.Joystick(1)
+
+        # initiates servos
+        self.servo = wpilib.Servo(2)
+        self.servo1 = wpilib.Servo(3)
 
         # Initiates Ball shooter
         self.leftSpinner = wpilib.Talon(4)
@@ -82,11 +87,11 @@ class MyRobot(wpilib.IterativeRobot):
             self.rightSpinner.set(0)
             self.loader.set(0)
 
-        # if Button X is pushed, then the elevator will go down
-        if self.stick.getRawButton(3):
+        # if Button X is pushed, then the elevator will go down(controller 2)
+        if self.stick1.getRawButton(3):
             self.liftMotor.set(-1.0)
             self.liftMotor2.set(-1.0)
-        elif self.stick.getRawButton(4):  # if button Y is pushed, then the elevator will go up
+        elif self.stick1.getRawButton(4):  # if button Y is pushed, then the elevator will go up
             self.liftMotor.set(1.0)
             self.liftMotor2.set(1.0)
         else:
@@ -100,6 +105,14 @@ class MyRobot(wpilib.IterativeRobot):
             self.shooterAngle.set(1.0)
         else:
             self.shooterAngle.set(0)
+
+        # Camera servo control, needs testing
+        if self.stick1.getRawButton(5):
+            self.servo.set(0.0)
+        elif self.stick1.getRawButton(6):
+            self.servo.set(1.0)
+
+
 
     def testPeriodic(self):
         """This function is called periodically during test mode."""
