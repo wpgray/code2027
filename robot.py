@@ -20,7 +20,7 @@ class MyRobot(wpilib.IterativeRobot):
         self.stick = wpilib.Joystick(0)
         self.stick1 = wpilib.Joystick(1)
 
-        # initiates servos
+        # initiates servos for camera
         self.servo = wpilib.Servo(2)
         self.servo1 = wpilib.Servo(3)
 
@@ -29,12 +29,13 @@ class MyRobot(wpilib.IterativeRobot):
         self.rightSpinner = wpilib.Talon(5)
 
         # Initiates angle motor and Loader
-        self.aimer = wpilib.Talon(6)
+        self.aimer = wpilib.Spark(6)
         self.loader = wpilib.Talon(7)
 
         # Initiating the lift
         self.liftMotor = wpilib.Talon(8)
         self.liftMotor2 = wpilib.Talon(9)
+
 
         # Adjust the angle of the shooter
         self.shooterAngle = wpilib.Talon(10)
@@ -76,11 +77,11 @@ class MyRobot(wpilib.IterativeRobot):
         # if button A is pushed, then Spin Shooter will take a ball in.
         if self.stick.getRawButton(1):
             self.leftSpinner.set(-1.0)
-            self.rightSpinner.set(-1.0)
+            self.rightSpinner.set(1.0)
             self.loader.set(-1.0)
         elif self.stick.getRawButton(2):  # if button B is pushed, ball shoots out.
             self.leftSpinner.set(1.0)
-            self.rightSpinner.set(1.0)
+            self.rightSpinner.set(-1.0)
             self.loader.set(1.0)
         else:
             self.leftSpinner.set(0)
@@ -106,12 +107,11 @@ class MyRobot(wpilib.IterativeRobot):
         else:
             self.shooterAngle.set(0)
 
-        # Camera servo control, needs testing
-        if self.stick1.getRawButton(5):
-            self.servo.set(0.0)
-        elif self.stick1.getRawButton(6):
+        # Camera servo control
+        if self.stick1.getX():
             self.servo.set(1.0)
-
+        elif self.stick1.getY():
+            self.servo1.set(-1.0)
 
 
     def testPeriodic(self):
